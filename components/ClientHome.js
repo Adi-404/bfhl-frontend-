@@ -20,7 +20,8 @@ export default function ClientHome() {
 
     try {
       const parsedInput = JSON.parse(input)
-      const res = await fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + '/bfhl', {
+      console.log(parsedInput)
+      const res = await fetch('https://bfhl-main-aditya-mahapatras-projects.vercel.app/bfhl', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
