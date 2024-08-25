@@ -62,6 +62,8 @@ export default function ClientHome() {
       </Head>
 
       <h1>BFHL Frontend - 21BRS1114</h1>
+      <p><strong>Example input1:</strong> &#123;"data": ["2","4","5","92"]&#125;</p>
+      <p><strong>Example input1:</strong> &#123;"data": ["M", "1", "334", "4", "B", "Z", "a"]&#125;</p>
       <form onSubmit={handleSubmit}>
         <textarea
           value={input}
