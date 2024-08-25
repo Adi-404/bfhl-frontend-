@@ -7,7 +7,7 @@ export default function ClientHome() {
   const [input, setInput] = useState('')
   const [error, setError] = useState('')
   const [response, setResponse] = useState(null)
-  const [selectedOptions, setSelectedOptions] = useState([])
+  const [selectedOption, setSelectedOption] = useState('')
 
   useEffect(() => {
     document.title = '21BRS1114'
@@ -41,23 +41,18 @@ export default function ClientHome() {
   }
 
   const handleOptionChange = (e) => {
-    const value = e.target.value
-    setSelectedOptions(prevOptions =>
-      prevOptions.includes(value)
-        ? prevOptions.filter(option => option !== value)
-        : [...prevOptions, value]
-    )
+    setSelectedOption(e.target.value)
   }
 
   const renderResponse = () => {
-    if (!response) return null
+    if (!response || !selectedOption) return null
 
-    return selectedOptions.map(option => (
-      <div key={option}>
-        <h3>{option}</h3>
-        <p>{JSON.stringify(response[option])}</p>
+    return (
+      <div>
+        <h3>{selectedOption}</h3>
+        <p>{JSON.stringify(response[selectedOption])}</p>
       </div>
-    ))
+    )
   }
 
   return (
@@ -78,40 +73,13 @@ export default function ClientHome() {
       {error && <p className="error">{error}</p>}
       {response && (
         <div>
-          <h2>Select options to display:</h2>
-          <div>
-            <label>
-              <input
-                type="checkbox"
-                value="alphabets"
-                onChange={handleOptionChange}
-                checked={selectedOptions.includes('alphabets')}
-              />
-              Alphabets
-            </label>
-          </div>
-          <div>
-            <label>
-              <input
-                type="checkbox"
-                value="numbers"
-                onChange={handleOptionChange}
-                checked={selectedOptions.includes('numbers')}
-              />
-              Numbers
-            </label>
-          </div>
-          <div>
-            <label>
-              <input
-                type="checkbox"
-                value="highest_lowercase_alphabet"
-                onChange={handleOptionChange}
-                checked={selectedOptions.includes('highest_lowercase_alphabet')}
-              />
-              Highest lowercase alphabet
-            </label>
-          </div>
+          <h2>Select option to display:</h2>
+          <select onChange={handleOptionChange} value={selectedOption}>
+            <option value="">Choose an option</option>
+            <option value="alphabets">Alphabets</option>
+            <option value="numbers">Numbers</option>
+            <option value="highest_lowercase_alphabet">Highest lowercase alphabet</option>
+          </select>
         </div>
       )}
       {renderResponse()}
